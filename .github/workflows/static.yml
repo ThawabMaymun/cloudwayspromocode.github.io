@@ -1,0 +1,908 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export default function App() {
+  const [openFaq, setOpenFaq] = useState(null);
+  
+  // Table data for free hosting duration
+  const hostingTable = [
+    { provider: "DigitalOcean", plan: "1GB RAM", cost: "~$11/month", duration: "~3 months" },
+    { provider: "Vultr", plan: "1GB RAM", cost: "~$12/month", duration: "~2.5 months" },
+    { provider: "Linode", plan: "1GB RAM", cost: "~$12/month", duration: "~2.5 months" }
+  ];
+  
+  // Comparison table data
+  const comparisonData = [
+    { feature: "Speed", cloudways: "High", shared: "Medium/Low" },
+    { feature: "Resources", cloudways: "Dedicated", shared: "Shared" },
+    { feature: "Security", cloudways: "Advanced", shared: "Basic" },
+    { feature: "Scalability", cloudways: "Instant", shared: "Limited" },
+    { feature: "SEO Performance", cloudways: "Strong", shared: "Moderate" }
+  ];
+  
+  // FAQ data
+  const faqs = [
+    { 
+      question: "Is the Cloudways promo code legitimate?", 
+      answer: "Yes. BLOGGINGSTART is active and verified for 2026. It provides $30 free hosting credit with no credit card required." 
+    },
+    { 
+      question: "Do I need a credit card to sign up?", 
+      answer: "No. You can create a Cloudways account and claim your $30 credit without providing any payment information." 
+    },
+    { 
+      question: "Can I host WordPress during the free credit period?", 
+      answer: "Yes. You get full access to all Cloudways features including one-click WordPress installation, caching, and staging environments." 
+    },
+    { 
+      question: "Can I cancel anytime?", 
+      answer: "Yes. There are no contracts or cancellation fees. You only pay for what you use after the free credit is exhausted." 
+    },
+    { 
+      question: "Is Cloudways good for SEO?", 
+      answer: "Absolutely. Faster hosting directly improves Core Web Vitals, page load times, and search engine rankings - all critical for SEO success in 2026." 
+    }
+  ];
+  
+  // Pros and Cons
+  const pros = [
+    "$30 free hosting credit with no credit card required",
+    "Excellent performance with dedicated cloud resources",
+    "Built-in security features including free SSL and firewalls",
+    "Automatic daily backups with one-click restore",
+    "Flexible scaling - upgrade or downgrade anytime",
+    "24/7 expert support via chat, phone, and tickets"
+  ];
+  
+  const cons = [
+    "No built-in email hosting (requires third-party service)",
+    "Slight learning curve for complete beginners"
+  ];
+
+  // FIXED: Updated URL with trailing slash as requested
+  const CLAIM_URL = "https://bloggingstart.com/cloudways/";
+
+  return (
+    <div className="font-sans text-gray-800 bg-white">
+      {/* Sticky CTA Bar - FIXED WITH CORRECT URL AND FULLY CLICKABLE */}
+      <motion.div 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-indigo-800 text-white z-[100] shadow-lg py-3 px-4"
+      >
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex items-center mb-2 sm:mb-0">
+            <span className="bg-yellow-400 text-indigo-900 font-bold px-3 py-1 rounded mr-3 text-lg">BLOGGINGSTART</span>
+            <span className="font-medium">Get $30 FREE Hosting Credit - No Credit Card Required</span>
+          </div>
+          {/* FULLY FUNCTIONAL CTA BUTTON WITH CORRECT URL */}
+          <motion.a
+            href={CLAIM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold px-6 py-2 rounded-lg shadow-md transition-all inline-flex items-center cursor-pointer"
+          >
+            Claim Your Credit →
+          </motion.a>
+        </div>
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="pt-20">
+        {/* Hero Section */}
+        <header className="bg-gradient-to-br from-blue-50 to-indigo-50 py-16 px-4 border-b border-gray-100">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            >
+              Cloudways Promo Code 2026 – Get $30 FREE Hosting Credit with BLOGGINGSTART
+            </motion.h1>
+            <div className="mt-8 flex justify-center">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-indigo-900 font-bold text-2xl px-8 py-4 rounded-xl shadow-xl"
+              >
+                BLOGGINGSTART
+              </motion.div>
+            </div>
+          </div>
+        </header>
+
+        <article className="max-w-4xl mx-auto px-4 py-12 prose prose-lg">
+          {/* Introduction */}
+          <section className="mb-16">
+            <p className="text-xl text-gray-700 leading-relaxed mb-6">
+              Let's be honest. Most people don't switch hosting because they want to. They switch because they have to.
+            </p>
+            
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-8">
+              <p className="font-medium text-gray-800">
+                Their website gets slow. Pages take 4–5 seconds to load. Traffic increases slightly and suddenly everything feels unstable. Support tickets go unanswered. Rankings drop.
+              </p>
+            </div>
+            
+            <p className="text-gray-700 mb-6">
+              And then the search begins:
+            </p>
+            
+            <ul className="list-none space-y-2 mb-8">
+              {[
+                '"Best hosting for speed."',
+                '"Fast WordPress hosting."',
+                '"Cloud hosting vs shared hosting."',
+                '"Cloudways promo code."'
+              ].map((item, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-2 mt-1">•</span>
+                  <span className="text-gray-800">{item}</span>
+                </li>
+              ))}
+            </ul>
+            
+            <p className="text-gray-700 mb-6">
+              If that sounds familiar, you're in the right place.
+            </p>
+            
+            <p className="text-gray-700 mb-6">
+              In 2026, website performance is no longer optional. Google cares about speed. Users care about speed. Your revenue depends on speed.
+            </p>
+            
+            <p className="text-gray-700 mb-6">
+              That's exactly why so many bloggers, affiliate marketers, developers, and business owners are turning to Cloudways — and searching for a working Cloudways promo code before signing up.
+            </p>
+            
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6 mb-8">
+              <p className="font-bold text-green-800 text-lg mb-2">The good news?</p>
+              <p className="text-gray-800">
+                👉 You can use the Cloudways promo code <span className="bg-yellow-200 font-mono px-2 py-1 rounded">BLOGGINGSTART</span> to get $30 FREE hosting credit. That's enough for up to 3 months of premium managed cloud hosting — with no credit card required.
+              </p>
+            </div>
+            
+            <p className="text-gray-700">
+              This guide explains everything clearly and honestly, so you can decide if Cloudways is right for you.
+            </p>
+          </section>
+
+          {/* Promo Code Section */}
+          <section id="claim" className="mb-16 bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+            <div className="bg-gradient-to-r from-blue-600 to-indigo-800 text-white p-6 text-center">
+              <h2 className="text-2xl font-bold mb-2">Cloudways Promo Code 2026 (Verified & Active)</h2>
+              <p className="opacity-90">Let's talk about the actual offer.</p>
+            </div>
+            <div className="p-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
+                  <div className="flex items-start mb-4">
+                    <div className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                      <span>✓</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-1">Working Cloudways Promo Code</h3>
+                      <p className="text-gray-700">Code: <span className="font-mono bg-gray-100 px-2 py-1 rounded font-bold">BLOGGINGSTART</span></p>
+                    </div>
+                  </div>
+                  <ul className="space-y-2 mt-4 pl-6 text-gray-700">
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2 mt-1">✓</span>
+                      <span>Bonus: $30 FREE hosting credit</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2 mt-1">✓</span>
+                      <span>Credit Card Required: No</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2 mt-1">✓</span>
+                      <span>Access Level: Full platform</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-green-500 mr-2 mt-1">✓</span>
+                      <span>Eligible Users: New customers</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-amber-50 p-6 rounded-xl border border-amber-100">
+                  <h3 className="font-bold text-lg mb-3">Important to Know</h3>
+                  <p className="text-gray-700 mb-4">
+                    This is not a limited demo. The $30 credit is added directly to your Cloudways balance and deducted as your server runs.
+                  </p>
+                  <p className="text-gray-700">
+                    You can host real websites, install WordPress, run WooCommerce, test performance — everything.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="text-center mb-10">
+                <h3 className="text-xl font-bold mb-4 text-gray-900">How Much Free Hosting Do You Really Get?</h3>
+                <p className="text-gray-700 mb-6">
+                  Because Cloudways uses pay-as-you-go billing, your credit stretches further than most hosting trials.
+                </p>
+                
+                <div className="overflow-x-auto">
+                  <table className="min-w-full border-collapse border border-gray-200">
+                    <thead>
+                      <tr className="bg-blue-600 text-white">
+                        <th className="border border-gray-300 px-4 py-3">Cloud Provider</th>
+                        <th className="border border-gray-300 px-4 py-3">Entry Plan</th>
+                        <th className="border border-gray-300 px-4 py-3">Monthly Cost</th>
+                        <th className="border border-gray-300 px-4 py-3">Free Duration</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {hostingTable.map((row, index) => (
+                        <tr 
+                          key={index} 
+                          className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
+                        >
+                          <td className="border border-gray-200 px-4 py-3 font-medium">{row.provider}</td>
+                          <td className="border border-gray-200 px-4 py-3">{row.plan}</td>
+                          <td className="border border-gray-200 px-4 py-3">{row.cost}</td>
+                          <td className="border border-gray-200 px-4 py-3 font-bold text-green-700">{row.duration}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+                  <p className="font-medium text-gray-800">
+                    👉 Best value: DigitalOcean 1GB plan. With this plan, your $30 free credit covers nearly three months — more than enough time to properly evaluate hosting performance.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-800 rounded-xl p-8 text-white text-center">
+                <h3 className="text-2xl font-bold mb-4">Ready to Claim Your $30 Credit?</h3>
+                <p className="text-xl mb-6 opacity-90 max-w-2xl mx-auto">
+                  Use promo code <span className="bg-yellow-400 text-indigo-900 font-bold px-3 py-1 rounded-lg font-mono text-2xl">BLOGGINGSTART</span> at checkout
+                </p>
+                {/* FULLY FUNCTIONAL CTA BUTTON */}
+                <motion.a
+                  href={CLAIM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg transition-all inline-block"
+                >
+                  Claim Your $30 FREE Credit Now
+                </motion.a>
+                <p className="mt-4 text-sm opacity-80">
+                  No credit card required • New accounts only • Full platform access
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Remaining content sections - CTAs updated with correct URL */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Step-by-Step: How to Use the Cloudways Promo Code</h2>
+            <p className="text-gray-700 mb-6">
+              Here's how to activate your free hosting credit:
+            </p>
+            
+            <div className="space-y-8">
+              {[1, 2, 3, 4, 5].map((step) => (
+                <div key={step} className="flex flex-col md:flex-row">
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center text-xl font-bold mr-6 mb-4 md:mb-0">
+                    {step}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">
+                      {step === 1 && "Visit Cloudways"}
+                      {step === 2 && "Create an Account"}
+                      {step === 3 && "Enter the Promo Code"}
+                      {step === 4 && "Verify Your Account"}
+                      {step === 5 && "Launch Your Server"}
+                    </h3>
+                    <p className="text-gray-700">
+                      {step === 1 && "Go to the Cloudways website and click Start Free."}
+                      {step === 2 && "Sign up using: Email, Google, GitHub, or LinkedIn. No credit card required."}
+                      {step === 3 && "During signup, enter: BLOGGINGSTART and click Apply. Your $30 credit will be added instantly."}
+                      {step === 4 && "Email or phone verification may be required to activate your account."}
+                      {step === 5 && "Choose: Cloud provider, Server size, Location, Application (WordPress, WooCommerce, etc.). Your server will deploy within minutes."}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* What is Cloudways */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">What Is Cloudways?</h2>
+            <p className="text-gray-700 mb-6">
+              Cloudways is a managed cloud hosting platform that combines the power of cloud infrastructure with the simplicity of managed hosting.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Instead of placing your website on traditional shared hosting (where hundreds of websites share the same resources), Cloudways allows you to deploy your site on powerful cloud servers from providers such as:
+            </p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+              {["DigitalOcean", "Vultr", "Linode", "AWS", "Google Cloud"].map((provider, index) => (
+                <div 
+                  key={index} 
+                  className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center hover:border-blue-300 transition-all"
+                >
+                  <div className="font-bold text-gray-800">{provider}</div>
+                </div>
+              ))}
+            </div>
+            
+            <p className="text-gray-700 mb-6">
+              The key difference? Cloudways manages everything for you.
+            </p>
+            
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+              <h3 className="font-bold text-xl mb-4 text-blue-900">That means:</h3>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {[
+                  "Server setup is automated",
+                  "Security patches are handled",
+                  "Performance optimization is built-in",
+                  "Backups are automatic",
+                  "Scaling is simple"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <p className="text-gray-700">
+              You don't need to touch the command line. You don't need to configure Linux servers. You don't need to worry about updates breaking your site.
+            </p>
+            <p className="text-gray-700 font-medium">
+              You focus on your website. Cloudways handles the infrastructure.
+            </p>
+          </section>
+
+          {/* Why Hosting Matters */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Why Hosting Matters More Than Ever in 2026</h2>
+            <p className="text-gray-700 mb-6">
+              A few years ago, hosting was just something you paid for annually and forgot about. Today, it directly affects:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {[
+                "SEO rankings",
+                "Core Web Vitals",
+                "Page speed",
+                "Bounce rates",
+                "Conversion rates",
+                "User trust"
+              ].map((item, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+                >
+                  <div className="text-blue-600 font-bold text-xl mb-2">{item}</div>
+                </div>
+              ))}
+            </div>
+            
+            <p className="text-gray-700 mb-6">
+              Google's algorithm now strongly rewards fast, stable, secure websites. Slow hosting can quietly hurt your growth. You may not even realize it's happening.
+            </p>
+            
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6 mb-8">
+              <h3 className="font-bold text-xl mb-3 text-amber-900">If your website loads in:</h3>
+              <ul className="space-y-2">
+                <li><span className="font-bold text-green-700">1–2 seconds</span> → You're competitive</li>
+                <li><span className="font-bold text-amber-700">3–4 seconds</span> → Users start leaving</li>
+                <li><span className="font-bold text-red-700">5+ seconds</span> → You're losing traffic</li>
+              </ul>
+            </div>
+            
+            <p className="text-gray-700 font-medium">
+              Cloudways is built specifically for performance-first hosting.
+            </p>
+          </section>
+
+          {/* Why Cloudways is Faster */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Why Cloudways Is Faster Than Shared Hosting</h2>
+            <p className="text-gray-700 mb-6">
+              This is where things get interesting. Shared hosting puts hundreds of websites on the same server. When traffic increases for one site, others slow down.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Cloudways gives you dedicated cloud resources. You get:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {[
+                { icon: "⚡", title: "SSD / NVMe storage", desc: "Ultra-fast disk I/O for rapid data access" },
+                { icon: "🚀", title: "Advanced caching", desc: "Varnish, Redis, and Memcached built-in" },
+                { icon: "⚙️", title: "Latest PHP versions", desc: "Optimized runtime with JIT compilation" },
+                { icon: "🌐", title: "HTTP/3 support", desc: "Next-gen protocol for faster connections" },
+                { icon: "☁️", title: "Optional Cloudflare CDN", desc: "Global content delivery network" },
+                { icon: "📈", title: "Vertical scaling", desc: "Instantly upgrade resources as needed" }
+              ].map((item, index) => (
+                <div 
+                  key={index} 
+                  className="bg-gray-50 border border-gray-200 rounded-xl p-6 hover:border-blue-300 transition-all"
+                >
+                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                  <p className="text-gray-700">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+              <h3 className="font-bold text-xl mb-3 text-green-900">The result?</h3>
+              <ul className="space-y-2">
+                {[
+                  "Faster page load times",
+                  "Improved Core Web Vitals",
+                  "Better SEO rankings",
+                  "Higher conversions",
+                  "Lower bounce rates"
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 font-medium text-gray-800">
+                This isn't plugin-based speed. It's infrastructure-level performance.
+              </p>
+            </div>
+          </section>
+
+          {/* Security Features */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Cloudways Security Features</h2>
+            <p className="text-gray-700 mb-6">
+              Security isn't optional anymore. Cloudways includes:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                "Free SSL certificates",
+                "Dedicated firewalls",
+                "Two-factor authentication",
+                "OS-level security patching",
+                "IP whitelisting",
+                "Bot protection"
+              ].map((feature, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+                >
+                  <div className="text-blue-600 font-bold mb-2">✓</div>
+                  <div className="font-medium text-gray-800">{feature}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="mt-10 bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r">
+              <p className="font-medium text-gray-800">
+                You don't need separate security plugins just to feel safe. Cloudways provides enterprise-grade security out of the box.
+              </p>
+            </div>
+          </section>
+
+          {/* Backups Section */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Automatic Backups & Easy Recovery</h2>
+            <p className="text-gray-700 mb-6">
+              Websites break. Plugins conflict. Updates fail. Human mistakes happen.
+            </p>
+            <p className="text-gray-700 mb-6">
+              Cloudways provides:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              {[
+                { title: "Automatic daily backups", icon: "🔄" },
+                { title: "Custom backup frequency", icon: "⏱️" },
+                { title: "One-click restore", icon: "↩️" }
+              ].map((item, index) => (
+                <div 
+                  key={index} 
+                  className="bg-gray-50 border border-gray-200 rounded-xl p-8 text-center"
+                >
+                  <div className="text-4xl mb-4">{item.icon}</div>
+                  <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+              <p className="font-medium text-gray-800 text-lg">
+                If something goes wrong, you can restore your site in seconds.
+              </p>
+            </div>
+          </section>
+
+          {/* WordPress Section */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Cloudways for WordPress Hosting</h2>
+            <p className="text-gray-700 mb-6">
+              WordPress users benefit the most from Cloudways. You get:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {[
+                "One-click WordPress install",
+                "Breeze caching plugin (optimized for Cloudways)",
+                "Redis object caching",
+                "Staging environments",
+                "Automatic backups",
+                "Free SSL certificates",
+                "Git integration",
+                "SSH/SFTP access"
+              ].map((feature, index) => (
+                <div key={index} className="flex items-start">
+                  <span className="text-blue-600 font-bold mr-3 mt-1">✓</span>
+                  <span>{feature}</span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8 text-center">
+              <p className="font-bold text-xl text-gray-900">
+                This makes Cloudways one of the strongest WordPress hosting options in 2026.
+              </p>
+            </div>
+          </section>
+
+          {/* WooCommerce Section */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Cloudways for WooCommerce & Online Stores</h2>
+            <p className="text-gray-700 mb-6">
+              WooCommerce stores need:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+              {[
+                "Fast databases for product queries",
+                "Stable uptime during sales events",
+                "Secure checkout pages with SSL",
+                "Scalability during traffic spikes"
+              ].map((requirement, index) => (
+                <div key={index} className="flex items-start">
+                  <span className="bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-1 text-sm">✓</span>
+                  <span>{requirement}</span>
+                </div>
+              ))}
+            </div>
+            
+            <p className="text-gray-700 mb-6">
+              Cloudways handles WooCommerce smoothly. Benefits include:
+            </p>
+            
+            <ul className="space-y-3 mb-10">
+              {[
+                "Faster checkout performance reducing cart abandonment",
+                "Better SEO from improved page speed",
+                "Stable sales during Black Friday/Cyber Monday traffic",
+                "Easy vertical scaling as your store grows"
+              ].map((benefit, index) => (
+                <li key={index} className="flex items-start">
+                  <span className="text-green-500 text-2xl mr-3 mt-1">✓</span>
+                  <span className="text-gray-700">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+            
+            <div className="bg-rose-50 border border-rose-200 rounded-xl p-6">
+              <p className="font-medium text-gray-800">
+                For eCommerce owners, this is a serious upgrade from shared hosting.
+              </p>
+            </div>
+          </section>
+
+          {/* Pricing Section */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Cloudways Pricing After the Free Credit</h2>
+            <p className="text-gray-700 mb-6">
+              Once your $30 credit runs out, regular pricing begins.
+            </p>
+            
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
+              <h3 className="font-bold text-xl mb-4 text-gray-900">Entry-level plans:</h3>
+              <ul className="space-y-2">
+                {[
+                  "DigitalOcean: $11/month",
+                  "Vultr: $12/month",
+                  "Linode: $12/month",
+                  "AWS: $13.50/month",
+                  "Google Cloud: $14.50/month"
+                ].map((plan, index) => (
+                  <li key={index} className="text-gray-700">{plan}</li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+              {[
+                { title: "No contracts", desc: "Cancel anytime without penalties" },
+                { title: "No cancellation fees", desc: "Stop service whenever you want" },
+                { title: "Pay-as-you-go billing", desc: "Only pay for resources you use" }
+              ].map((item, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+                >
+                  <div className="font-bold text-xl text-blue-600 mb-2">{item.title}</div>
+                  <div className="text-gray-600">{item.desc}</div>
+                </div>
+              ))}
+            </div>
+            
+            <p className="text-gray-700 font-medium">
+              You can scale your server up or down anytime through the Cloudways dashboard.
+            </p>
+          </section>
+
+          {/* Comparison Section */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Cloudways vs Shared Hosting (Honest Comparison)</h2>
+            
+            <div className="overflow-x-auto mb-10">
+              <table className="min-w-full border-collapse border border-gray-300">
+                <thead>
+                  <tr className="bg-blue-600 text-white">
+                    <th className="border border-gray-300 px-4 py-3">Feature</th>
+                    <th className="border border-gray-300 px-4 py-3">Cloudways</th>
+                    <th className="border border-gray-300 px-4 py-3">Shared Hosting</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonData.map((row, index) => (
+                    <tr 
+                      key={index} 
+                      className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
+                    >
+                      <td className="border border-gray-200 px-4 py-3 font-medium">{row.feature}</td>
+                      <td className="border border-gray-200 px-4 py-3 font-bold text-green-700">{row.cloudways}</td>
+                      <td className="border border-gray-200 px-4 py-3 text-amber-700">{row.shared}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-8 text-center">
+              <p className="font-bold text-xl text-gray-900">
+                If your website generates traffic or income, Cloudways is a better long-term choice.
+              </p>
+            </div>
+          </section>
+
+          {/* Who Should Use */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-6 text-gray-900">Who Should Use the Cloudways Promo Code?</h2>
+            <p className="text-gray-700 mb-6">
+              Cloudways is ideal for:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+              {[
+                "Bloggers serious about SEO",
+                "Affiliate marketers",
+                "WooCommerce store owners",
+                "Agencies managing client sites",
+                "Developers",
+                "Growing startups"
+              ].map((audience, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:shadow-md transition-shadow"
+                >
+                  <div className="font-bold text-gray-800">{audience}</div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r">
+              <p className="font-medium text-gray-800 text-lg">
+                If performance matters, this promo code gives you a safe way to test Cloudways before committing.
+              </p>
+            </div>
+          </section>
+
+          {/* Pros and Cons */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Pros & Cons of Cloudways</h2>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Pros */}
+              <div className="bg-blue-50 border border-blue-200 rounded-xl p-8">
+                <div className="flex items-center mb-6">
+                  <div className="bg-green-500 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">
+                    ✓
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Pros</h3>
+                </div>
+                <ul className="space-y-4">
+                  {pros.map((pro, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-green-500 text-2xl mr-3 mt-1">✓</span>
+                      <span className="text-gray-700">{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              {/* Cons */}
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-8">
+                <div className="flex items-center mb-6">
+                  <div className="bg-amber-500 text-white rounded-full w-12 h-12 flex items-center justify-center mr-4 text-xl">
+                    !
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Cons</h3>
+                </div>
+                <ul className="space-y-4">
+                  {cons.map((con, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-amber-500 text-2xl mr-3 mt-1">•</span>
+                      <span className="text-gray-700">{con}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 bg-white border border-amber-300 rounded-lg p-4">
+                  <p className="font-medium text-gray-800">
+                    Overall, the advantages clearly outweigh the downsides for most serious website owners.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQs */}
+          <section className="mb-16">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900">Frequently Asked Questions</h2>
+            
+            <div className="space-y-4">
+              {faqs.map((faq, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white border border-gray-200 rounded-xl overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    className="flex justify-between items-center w-full p-6 text-left font-bold text-lg focus:outline-none hover:bg-gray-50"
+                  >
+                    <span>{faq.question}</span>
+                    <span className="text-2xl transform transition-transform duration-300">
+                      {openFaq === index ? '−' : '+'}
+                    </span>
+                  </button>
+                  
+                  {openFaq === index && (
+                    <div className="px-6 pb-6 pt-0 text-gray-700 border-t border-gray-100">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Final Verdict */}
+          <section className="mb-16">
+            <div className="bg-gradient-to-br from-blue-600 to-indigo-800 rounded-3xl p-10 text-white text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Final Verdict – Is Cloudways Worth It in 2026?</h2>
+              
+              <div className="max-w-3xl mx-auto mb-10">
+                <p className="text-xl opacity-90 mb-6">
+                  If you want:
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                  {[
+                    "Faster website speed",
+                    "Better SEO performance",
+                    "Reliable uptime",
+                    "Managed cloud hosting",
+                    "Risk-free testing"
+                  ].map((benefit, index) => (
+                    <div key={index} className="flex items-start">
+                      <span className="text-yellow-300 text-2xl mr-3 mt-1">✓</span>
+                      <span className="text-lg">{benefit}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <p className="text-2xl font-bold mb-8">
+                  Then Cloudways is absolutely worth trying.
+                </p>
+                
+                <p className="text-xl opacity-90 mb-10">
+                  With the Cloudways promo code BLOGGINGSTART, you can test premium managed cloud hosting without paying upfront.
+                </p>
+              </div>
+              
+              {/* FULLY FUNCTIONAL CTA BUTTON */}
+              <motion.a
+                href={CLAIM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold text-xl px-10 py-5 rounded-xl shadow-xl transition-all"
+              >
+                Claim your $30 FREE hosting credit and see the difference for yourself →
+              </motion.a>
+              
+              <div className="mt-8 flex justify-center">
+                <div className="bg-yellow-400 text-indigo-900 font-bold text-3xl px-8 py-4 rounded-xl shadow-lg">
+                  BLOGGINGSTART
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
+      </div>
+
+      {/* Footer CTA */}
+      <section className="bg-gradient-to-r from-blue-700 to-indigo-900 text-white py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Website Performance?</h2>
+          <p className="text-xl mb-10 opacity-90 max-w-3xl mx-auto">
+            Join thousands of bloggers, developers, and business owners who upgraded to Cloudways in 2026. Get $30 free credit with no credit card required.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row justify-center gap-6 mb-12">
+            <div className="bg-yellow-400 text-indigo-900 font-bold text-2xl px-8 py-4 rounded-xl shadow-lg">
+              BLOGGINGSTART
+            </div>
+            <div className="text-5xl font-bold">=</div>
+            <div className="bg-green-500 text-white font-bold text-2xl px-8 py-4 rounded-xl shadow-lg">
+              $30 FREE CREDIT
+            </div>
+          </div>
+          
+          {/* FULLY FUNCTIONAL CTA BUTTON */}
+          <motion.a
+            href={CLAIM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold text-xl px-10 py-5 rounded-xl shadow-xl transition-all inline-block"
+          >
+            Claim Your $30 Credit Now - No Credit Card Needed
+          </motion.a>
+          
+          <p className="mt-6 text-lg opacity-80">
+            Offer valid for new Cloudways accounts only • Credit valid for 3 months
+          </p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-300 py-12 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="font-bold text-2xl text-white mb-6 flex justify-center items-center">
+            <span className="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center mr-3">C</span>
+            Cloudways Promo Guide 2026
+          </div>
+          <p className="max-w-3xl mx-auto mb-8">
+            This is an independent guide about Cloudways hosting promotions. We are not affiliated with Cloudways Ltd. 
+            All information is accurate as of February 2026. Offers and features may change without notice.
+          </p>
+          <p className="text-gray-500 border-t border-gray-800 pt-8">
+            © {new Date().getFullYear()} BloggingStart Guide. All rights reserved. This is a demo page for informational purposes only.
+          </p>
+          <p className="mt-2 text-sm text-gray-600">
+            Cloudways is a registered trademark of Cloudways Ltd. This page is not endorsed by or affiliated with Cloudways.
+          </p>
+        </div>
+      </footer>
+    </div>
+  );
+}
